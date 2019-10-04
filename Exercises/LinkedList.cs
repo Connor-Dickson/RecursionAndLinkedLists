@@ -74,7 +74,17 @@ namespace Exercises
         /// </summary>
         /// <returns>int: count</returns>
         public int Count() {
-            return -1;
+            int nodeCount = 1;
+            ListNode current = Head;
+
+            while (current.Next != null)
+            {
+                current = current.Next;
+                nodeCount++;
+            }
+
+            
+            return nodeCount;
         }
 
         /// <summary>
@@ -83,7 +93,11 @@ namespace Exercises
         /// <param name="data"></param>
         /// <returns>success: true</returns>
         public bool AddToStart(string data) {
-            return false;
+            ListNode current = Head;
+            ListNode newNode = new ListNode(data, null);
+            Head = newNode;
+            newNode.Next = current;
+            return true;
         }
 
         /// <summary>
@@ -94,7 +108,27 @@ namespace Exercises
         /// <param name="index"></param>
         /// <returns></returns>
         public bool AddNodeAt(string data, int index) {
-            return false;
+            ListNode newNode = new ListNode(data, null);
+            ListNode current = Head;
+            int nodeCount = 0;
+            if (index < 0)
+            {
+                return false;
+            }
+            
+            while (nodeCount < index - 1)
+            {
+                if(current.Next == null)
+                {
+                    ListNode nullNode = new ListNode(null, null);
+                    current.Next = nullNode;
+                }
+                current = current.Next;
+                nodeCount++;
+            }
+            newNode.Next = current.Next;
+            current.Next = newNode;
+            return true;
         }
 
         /// <summary>
@@ -103,7 +137,24 @@ namespace Exercises
         /// <param name="index"></param>
         /// <returns></returns>
         public bool DeleteNodeAt(int index) {
-            return false;
+            ListNode current = Head;
+            ListNode prevNode = new ListNode(null);
+            int nodeCount = 0;
+            while(nodeCount < index)
+            {
+                if (current.Next == null)
+                {
+                    return false;
+                }
+                if (nodeCount == index - 1)
+                {
+                    prevNode = current;
+                }
+                nodeCount++;
+                current = current.Next;
+            }
+            prevNode.Next = current.Next;
+            return true;
         }
     }
 }

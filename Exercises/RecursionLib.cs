@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Exercises
 {
@@ -22,7 +23,14 @@ namespace Exercises
         /// <param name="numsList"></param>
         /// <returns></returns>
         public List<int> CountRec(int num, List<int> numsList) {
-            return new List<int>();
+            int lCount = numsList.Count;
+            if (lCount == num)
+            {
+                return numsList;
+            }
+            numsList.Add(lCount + 1);
+            return CountRec(num, numsList);
+            //return new List<int>();
         }
 
         /// <summary>
@@ -33,7 +41,15 @@ namespace Exercises
         /// <param name="ans"></param>
         /// <returns></returns>
         public long ExponentialRec(int num, int pow, long ans = 1) {
-            return 1;
+            
+            if(pow == 0)
+            {
+                return ans;
+            }
+            ans = ans * num;
+
+            pow--;
+            return ExponentialRec(num, pow, ans);
         }
 
         /// <summary>
@@ -43,7 +59,14 @@ namespace Exercises
         /// <param name="revWord"></param>
         /// <returns></returns>    
         public string WordReverseRec(string word, string revWord = "") {
-            return "";
+            int counter = revWord.Length;
+            if (revWord.Length == word.Length)
+            {
+                return revWord;
+            }
+
+            revWord += word[word.Length - 1 - counter];
+            return WordReverseRec(word, revWord);
         }
 
 
